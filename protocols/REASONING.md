@@ -1,4 +1,4 @@
-# 🧠 THE REASONING PROTOCOL
+# 🧠 THE REASONING PROTOCOL (System 2 Edition)
 
 **The "Decision Matrix" that bridges Questions and Solutions.**
 
@@ -32,15 +32,18 @@ Before writing `reasoning.md`, the AI MUST read `questions.md` to get the "5 Ws"
 
 ## 3️⃣ THE 5 POWER APPROACHES (Strategy Matrix)
 
-The AI must evaluate the problem using these 5 rigorous lenses. "Speed" and "Laziness" are FORBIDDEN.
+The AI must evaluate the problem using these 5 rigorous lenses.
 
-### 1. The Recursive Depth Approach
+### 1. The Recursive Depth Approach (The Tree of Thoughts)
 - **Philosophy**: "Divide and Conquer."
 - **Focus**: Break the problem into atomic units. Create sub-folders. Dive deep.
 - **Use Case**: Complex problems that cannot be solved in one step.
+- **ADVANCED (Tree of Thoughts)**:
+  - If the path is unclear, do NOT pick one child path.
+  - Create **COMPETING BRANCHES**: `sub/Option_A_Method` and `sub/Option_B_Method`.
+  - Explore both in parallel (Dive into A, then Dive into B).
+  - Use `SYNTHESIS` to pick the winner later.
 - **CRITICAL ACTION**: If selected, **YOU MUST UPDATE `status.md`** section "CHILDREN" with the new sub-problems immediately!
-- **Example Justification:**
-  > "Based on Q3 (94+ campaigns) and Q6 (ICB requires email/ages), the problem has 4 distinct sub-problems: parsing, matching, qualifying, reporting. Each requires different code."
 
 ### 2. The Fail-Safe System Approach
 - **Philosophy**: "Never Crash, Never Forget."
@@ -69,6 +72,11 @@ The AI must evaluate the problem using these 5 rigorous lenses. "Speed" and "Laz
 **Output Format in `reasoning.md` (DETAILED):**
 
 ```markdown
+<!-- 
+THINKING PROCESS:
+... (Internal monologue analyzing the 5 approaches) ...
+-->
+
 # Reasoning for [Problem Name]
 
 ## Selected Approach: [Name]
@@ -81,12 +89,24 @@ The AI must evaluate the problem using these 5 rigorous lenses. "Speed" and "Laz
 Based on the following answers from `questions.md`:
 - **Q1 Answer:** [Quote relevant part] → This means...
 - **Q3 Answer:** [Quote relevant part] → This indicates...
-- **Q7 Answer:** [Quote relevant part] → This requires...
 
 ### Why NOT Other Approaches?
 - **Fail-Safe:** Not needed because... [specific reason]
 - **Exhaustive Verification:** Premature because... [specific reason]
-- **God Mode:** Overkill for this stage because... [reason]
+
+---
+
+## 🛑 SELF-CORRECTION CHECKPOINT (The STaR Loop)
+*Before finalizing this plan, I have critiqued it against the following:*
+
+1.  **Assumption Check (Fact Check):**
+    - I assumed [X]. **Verification:** searched web/docs. Result: [Confirmed/Refuted].
+    - Evidence: [URL or Quote].
+2.  **Constraint Check:**
+    - Does this violate any constraint in `definition.md`? [Yes/No]
+3.  **Failure Mode Analysis:**
+    - If this plan fails, it will likely be due to [Reason].
+    - Mitigation: [Plan B].
 
 ---
 

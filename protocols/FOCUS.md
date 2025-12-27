@@ -1,4 +1,4 @@
-# 📍 THE FOCUS POINTER ALGORITHM
+# 📍 THE FOCUS POINTER ALGORITHM (Branching & Pruning + Anti-Drift)
 
 **The mechanism that controls the AI's "Position" in the project tree.**
 
@@ -13,10 +13,9 @@
 ## 🔄 THE CYCLE (Step-by-Step)
 
 ### A. THE WAKE-UP (Relative Logic)
-1.  **Detect Root**: Get current workspace directory (e.g., `e:\Project\`).
+1.  **Detect Root**: Get current workspace directory.
 2.  **Read Focus**: Read `Current_Focus.txt` (e.g., `problems/P1/`).
-3.  **Combine**: `Root` + `Focus` = `e:\Project\problems\P1\`.
-4.  **Navigate**: Go to that target folder.
+3.  **Navigate**: Go to that target folder.
 
 ### B. THE STATE CHECK
 1.  Read the local `status.md`.
@@ -28,13 +27,30 @@
 1.  Select the unchecked item (Target).
 2.  Is Target **Complex** (needs sub-folder)?
     - **YES**:
-        1. Create new folder `Target/`.
-        2. **CRITICAL**: Overwrite `Current_Focus.txt` with **RELATIVE PATH** `path/to/Target/`.
-        3. **STOP**. (Next turn wakes up in Target).
+        1. **🛑 SCOPE AUDIT (The Anti-Drift Check):**
+           - Does this sub-problem require a different **Skill Set**? (e.g., Dev vs. DevOps)
+           - Is it a **Blocker** rather than a **Step**?
+           - *If YES:* **DO NOT DIVE.**
+             1. Create new Sibling/Parent Problem (e.g., `problems/P2_FixServer`).
+             2. Mark current item `[ ] BLOCKED by P2`.
+             3. Switch Focus to `P2`.
+           - *If NO (It fits):*
+             1. Create new folder `Target/`.
+             2. **CRITICAL**: Overwrite `Current_Focus.txt` with **RELATIVE PATH** `path/to/Target/`.
+             3. **STOP**. (Next turn wakes up in Target).
     - **NO** (Atomic):
         1. Solve locally.
         2. Mark `[x]`.
         3. Repeat Step B.
+
+#### 🌳 BRANCHING LOGIC (Tree of Thoughts)
+If `status.md` lists **Competing Options** (e.g., `Option_A`, `Option_B`):
+1.  Dive into `Option_A` first. Solve it.
+2.  Pop back.
+3.  Dive into `Option_B` next. Solve it.
+4.  Pop back.
+5.  **Trigger Synthesis**: Compare A vs B in the parent's `FINAL_SOLUTION.md`.
+6.  **Prune**: You may delete the losing folder if desired, or keep it for record.
 
 ### D. THE POP (Moving Up)
 1.  All items in `status.md` are `[x]`.
